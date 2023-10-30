@@ -4,6 +4,7 @@ import jakarta.annotation.PostConstruct
 import org.slf4j.LoggerFactory
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
+import org.springframework.context.annotation.Lazy
 import org.springframework.stereotype.Component
 
 @SpringBootApplication
@@ -15,7 +16,7 @@ fun main(args: Array<String>) {
 
 @Component
 class FordPrefect(
-    private val humans: List<Human> = emptyList(),
+    private val humans: List<Human>/* = emptyList()*/,
 ) {
     @PostConstruct
     fun init() {
@@ -31,6 +32,7 @@ interface Human
 
 @Component
 class ArthurDent(
+    @Lazy
     private val fordPrefect: FordPrefect,
 ) : Human {
     override fun toString() = "Arthur"
@@ -38,6 +40,7 @@ class ArthurDent(
 
 @Component
 class TrishaMcMillan(
+    @Lazy
     private val fordPrefect: FordPrefect,
 ) : Human {
     override fun toString() = "Trisha"
